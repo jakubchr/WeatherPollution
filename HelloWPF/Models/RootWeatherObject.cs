@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents.DocumentStructures;
+using HelloWPF.Annotations;
 using Newtonsoft.Json;
 
 namespace HelloWPF.Models
 {
-    public class RootWeatherobject : IWeatherData
+    public class RootWeatherobject : IWeatherData, INotifyPropertyChanged
     {
         public RootWeatherobject() { }
         [JsonConstructor]
@@ -40,6 +43,13 @@ namespace HelloWPF.Models
         public int Id { get; private set; }
         public string Name { get; private set; }
         public int Cod { get; private set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
     public class Coord
