@@ -94,7 +94,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Wind Speed:" Margin="5"/>
                         <TextBlock Name="WindSpeedBox" Text="{Binding Wind.Speed}" Margin="5"/>
-                        <TextBlock Text="km/h" Margin="5"></TextBlock>
+                        <TextBlock Text="m/s" Margin="5"></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="---"></TextBlock>

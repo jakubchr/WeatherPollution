@@ -73,18 +73,25 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CompositionObjects\Clouds.cs" />
+    <Compile Include="Models\CompositionObjects\Coord.cs" />
     <Compile Include="Models\Interfaces\IURLBuilder.cs" />
+    <Compile Include="Models\CompositionObjects\Main.cs" />
     <Compile Include="Models\OpenWeatherAPIURLBuilder.cs" />
     <Compile Include="Models\OpenWeatherDataBinder.cs" />
     <Compile Include="Models\OpenWeatherDownloader.cs" />
-    <Compile Include="Models\RootWeatherObject.cs" />
+    <Compile Include="Models\OpenWeatherObject.cs" />
     <Compile Include="Models\Interfaces\ISettingsLogger.cs" />
     <Compile Include="Models\Interfaces\IWeatherLogger.cs" />
     <Compile Include="Models\Interfaces\IDataSource.cs" />
     <Compile Include="Models\Interfaces\IDataSourceConverter.cs" />
     <Compile Include="Models\Interfaces\ISettingsReader.cs" />
     <Compile Include="Models\Interfaces\IWeatherData.cs" />
+    <Compile Include="Models\CompositionObjects\Rain.cs" />
+    <Compile Include="Models\CompositionObjects\Sys.cs" />
     <Compile Include="Models\UnitConverter.cs" />
+    <Compile Include="Models\CompositionObjects\Wind.cs" />
+    <Compile Include="Models\CompositionObjects\Weather.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -9,7 +9,7 @@ namespace WePo.Models
 {
     class OpenWeatherDataBinder : IDataSourceConverter
     {
-        public IWeatherData WeatherData { get; private set; } = new RootWeatherobject();
+        public IWeatherData WeatherData { get; private set; }
         public IWeatherData DeserializeJSON<T>(string json_data) where T : IWeatherData
         {
             if (json_data.Length != 0)

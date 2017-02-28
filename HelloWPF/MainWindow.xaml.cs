@@ -56,7 +56,7 @@ namespace WePo
             }
 
             _weatherDownloader.DownloadDataByCity(_city);
-            _weatherData = (RootWeatherobject) _weatherDataBinder.DeserializeJSON<RootWeatherobject>(_weatherDownloader.PushURL());
+            _weatherData = (OpenWeatherObject) _weatherDataBinder.DeserializeJSON<OpenWeatherObject>(_weatherDownloader.PushURL());
 
             DetermineWeatherDataToShow();
         }
@@ -82,7 +82,7 @@ namespace WePo
                 _baseURL = @"http://api.openweathermap.org/data/2.5/weather";
                 _urlBuilder = new OpenWeatherAPIURLBuilder(_baseURL, _apiKey);
                 _weatherDownloader = new OpenWeatherDownloader(_urlBuilder);
-                _weatherData = new RootWeatherobject();
+                _weatherData = new OpenWeatherObject();
                 _weatherDataBinder = new OpenWeatherDataBinder();
             }
 
@@ -178,9 +178,9 @@ namespace WePo
             OpenWeatherAPIURLBuilder urlBuilder = new OpenWeatherAPIURLBuilder("http://api.openweathermap.org/data/2.5/weather", "f7e2509b51e34ef70bc66b0a816fbb11");
             OpenWeatherDownloader openWeatherDownloader = new OpenWeatherDownloader(urlBuilder);
             openWeatherDownloader.DownloadDataByCity("Siemiatycze");
-            RootWeatherobject rootWeatherobject = new RootWeatherobject();
+            OpenWeatherObject rootWeatherobject = new OpenWeatherObject();
             OpenWeatherDataBinder openWeatherDataBinder = new OpenWeatherDataBinder();
-            rootWeatherobject = (RootWeatherobject) openWeatherDataBinder.DeserializeJSON<RootWeatherobject>(openWeatherDownloader.PushURL());
+            rootWeatherobject = (OpenWeatherObject) openWeatherDataBinder.DeserializeJSON<OpenWeatherObject>(openWeatherDownloader.PushURL());
 
 
             TemperatureBox.Text = rootWeatherobject.Main.Temp.ToString("0.0000");
