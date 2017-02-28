@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWPF", "HelloWPF\HelloWPF.csproj", "{F4C45923-5E19-4E38-8401-9842FF888815}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WePoApp", "HelloWPF\WePoApp.csproj", "{F4C45923-5E19-4E38-8401-9842FF888815}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
