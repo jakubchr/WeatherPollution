@@ -11,25 +11,9 @@ using WePo.Annotations;
 
 namespace WePo.Models
 {
-    public class RootWeatherobject : IWeatherData
+    public class RootWeatherobject : IWeatherData, INotifyPropertyChanged
     {
-        public RootWeatherobject()
-        {
-            coord = new Coord();
-            weather = new Weather[1];
-            weather[0] = new Weather();
-            baseString = String.Empty;
-            main  = new Main();
-            wind =  new Wind();
-            rain = new Rain();
-            clouds = new Clouds();
-            dt = Int32.MinValue;
-            sys = new Sys();
-            id = Int32.MinValue;
-            name = String.Empty;
-            cod = Int32.MinValue;
-        }
-
+        public RootWeatherobject() { }
         [JsonConstructor]
         public RootWeatherobject(Coord coord, Weather[] weather, string baseBase, Main main, Wind wind, Rain rain,
             Clouds clouds, int dt, Sys sys,
@@ -58,6 +42,7 @@ namespace WePo.Models
             set
             {
                 coord = value;
+                OnPropertyChanged();
             }
         }
 
@@ -71,7 +56,8 @@ namespace WePo.Models
             }
             set
             {
-                weather = value;
+                weather = value; OnPropertyChanged();
+
             }
         }
         private string baseString;
@@ -84,7 +70,8 @@ namespace WePo.Models
             }
             set
             {
-                baseString = value;
+                baseString = value; OnPropertyChanged();
+
             }
         }
 
@@ -95,7 +82,8 @@ namespace WePo.Models
             get { return main; }
             set
             {
-                main = value;
+                main = value; OnPropertyChanged();
+
             }
         }
 
@@ -106,7 +94,8 @@ namespace WePo.Models
             get { return wind; }
             set
             {
-                wind = value;
+                wind = value; OnPropertyChanged();
+
             }
         }
 
@@ -117,7 +106,8 @@ namespace WePo.Models
             get { return rain; }
             set
             {
-                rain = value;
+                rain = value; OnPropertyChanged();
+
             }
         }
 
@@ -128,7 +118,8 @@ namespace WePo.Models
             get { return clouds; }
             set
             {
-                clouds = value;
+                clouds = value; OnPropertyChanged();
+
             }
         }
 
@@ -139,7 +130,8 @@ namespace WePo.Models
             get { return dt; }
             set
             {
-                dt = value;
+                dt = value; OnPropertyChanged();
+
             }
         }
 
@@ -148,7 +140,8 @@ namespace WePo.Models
         public Sys Sys
         {
             get { return sys; }
-            set { sys = value; }
+            set { sys = value; OnPropertyChanged();
+            }
         }
 
         private int id;
@@ -159,7 +152,8 @@ namespace WePo.Models
             {
                 return id;
             }
-            set { id = value; }
+            set { id = value; OnPropertyChanged();
+            }
         }
 
         private string name;
@@ -170,7 +164,7 @@ namespace WePo.Models
             {
                 return name;
             }
-            set { name = value; }
+            set { name = value; OnPropertyChanged();}
         }
 
         private int cod;
@@ -180,12 +174,21 @@ namespace WePo.Models
             get { return cod; }
             set
             {
-                cod = value;
+                cod = value; OnPropertyChanged();
+
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
-    public class Coord
+    public class Coord : INotifyPropertyChanged
     {
         public Coord() { }
         [JsonConstructor]
@@ -196,12 +199,22 @@ namespace WePo.Models
         }
 
         private float lon;
-        public float Lon { get {return lon;} set { lon = value; } }
+        public float Lon { get {return lon;} set { lon = value; OnPropertyChanged();
+            }
+        }
         private float lat;
-        public float Lat { get { return lat; } set { lat = value; } }
+        public float Lat { get { return lat; } set { lat = value; OnPropertyChanged();   }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class Main
+    public class Main : INotifyPropertyChanged
     {
         public Main() { }
         [JsonConstructor]
@@ -221,7 +234,8 @@ namespace WePo.Models
         public float Temp
         {
             get { return temp; }
-            set { temp = value; }
+            set { temp = value; OnPropertyChanged();
+            }
         }
 
         private float pressure;
@@ -229,7 +243,8 @@ namespace WePo.Models
             get { return pressure; }
             set
             {
-                pressure = value;
+                pressure = value; OnPropertyChanged();
+
             }
         }
 
@@ -243,7 +258,8 @@ namespace WePo.Models
             }
             set
             {
-                humidity = value;
+                humidity = value; OnPropertyChanged();
+
             }
         }
 
@@ -257,7 +273,8 @@ namespace WePo.Models
             }
             set
             {
-                tempMin = value;
+                tempMin = value; OnPropertyChanged();
+
             }
         }
 
@@ -271,7 +288,8 @@ namespace WePo.Models
             }
             set
             {
-                temp_max = value;
+                temp_max = value; OnPropertyChanged();
+
             }
         }
 
@@ -282,7 +300,8 @@ namespace WePo.Models
             get { return sea_Level; }
             set
             {
-                sea_Level = value;
+                sea_Level = value; OnPropertyChanged();
+
             }
         }
 
@@ -294,12 +313,21 @@ namespace WePo.Models
             {
                 return grnd_Level;
             }
-            set { grnd_Level = value;
+            set { grnd_Level = value; OnPropertyChanged();
+
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
-    public class Wind
+    public class Wind : INotifyPropertyChanged
     {
         public Wind() { }
         [JsonConstructor]
@@ -308,11 +336,45 @@ namespace WePo.Models
             Speed = speed;
             Deg = deg;
         }
-        public float Speed { get; private set; }
-        public float Deg { get; private set; }
+
+        private float speed;
+
+        public float Speed
+        {
+            get
+            {
+                return speed;
+            }
+            set { speed = value; OnPropertyChanged();
+            }
+        }
+
+        private float deg;
+
+        public float Deg
+        {
+            get
+            {
+                return deg;
+            }
+            set
+            {
+                deg = value;
+                OnPropertyChanged();
+
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class Rain
+    public class Rain : INotifyPropertyChanged
     {
         public Rain() { }
         [JsonConstructor]
@@ -321,9 +383,16 @@ namespace WePo.Models
             this._3h = _3h;
         }
         public float _3h { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class Clouds
+    public class Clouds : INotifyPropertyChanged
     {
         public Clouds() { }
         [JsonConstructor]
@@ -332,9 +401,16 @@ namespace WePo.Models
             All = all;
         }
         public int All { get; private set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class Sys
+    public class Sys : INotifyPropertyChanged
     {
         public Sys() { }
         [JsonConstructor]
@@ -349,9 +425,16 @@ namespace WePo.Models
         public string Country { get; private set; }
         public int Sunrise { get; private set; }
         public int Sunset { get; private set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class Weather
+    public class Weather : INotifyPropertyChanged
     {
         public Weather() { }
         [JsonConstructor]
@@ -366,6 +449,13 @@ namespace WePo.Models
         public string Main { get; private set; }
         public string Description { get; private set; }
         public string Icon { get; private set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
 }

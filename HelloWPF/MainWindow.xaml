@@ -32,8 +32,8 @@
                    ToolTip="Tick a data that you want to show" Grid.Column="1"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <CheckBox Name="CoordCheckBox" Content="Coord" Margin="5"></CheckBox>
-            <CheckBox Name="WeatherCheckBox" Content="Weather" Margin="5" IsChecked="True"></CheckBox>
-            <CheckBox Name="AdvancedCheckBox" Content="Advanced Weather" Margin="5"></CheckBox>
+            <CheckBox Name="WeatherCheckBox" Content="Weather" Margin="5" Checked="WeatherCheckBox_Checked" Unchecked="WeatherCheckBox_Unchecked"></CheckBox>
+            <CheckBox Name="AdvancedCheckBox" Content="Advanced Weather" Margin="5" Checked="AdvancedCheckBox_Checked" Unchecked="AdvancedCheckBox_Unchecked"></CheckBox>
             <CheckBox Name="SystemInfoCheckBox" Content="System Info" Margin="5"></CheckBox>
         </StackPanel>
 
@@ -65,15 +65,43 @@
         <Button Name="ShowWeatherButton" Content="Show Weather Data" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Top" Click="ShowWeatherButton_Click" Grid.Column="1"></Button>
 
         <Grid Grid.Row="8" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Temperature:" ToolTip="Click on the temperature to switch units." Grid.Row="0" Grid.Column="0" Margin="5" PreviewMouseDown="TextBlock_PreviewMouseDown"/>
-            <TextBlock Name="TemperatureBox" Text="{Binding Name}" Grid.Row="0" Grid.Column="1" Margin="5" PreviewMouseDown="TemperatureBox_PreviewMouseDown"/>
-            <TextBlock Name="TemperatureUnitBox" Text="K" Grid.Row="0" Grid.Column="2" Margin="5" PreviewMouseDown="TemperatureUnitBox_PreviewMouseDown"/>
+            <GroupBox Name="BasicWeatherGroupBox" Header="Basic Weather" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Temperature:" ToolTip="Click on the temperature to switch units." Margin="5" PreviewMouseDown="TextBlock_PreviewMouseDown"/>
+                    <TextBlock Name="TemperatureBox" Text="{Binding Main.Temp}" Margin="5" PreviewMouseDown="TemperatureBox_PreviewMouseDown"/>
+                    <TextBlock Name="TemperatureUnitBox" Text="K" Margin="5" PreviewMouseDown="TemperatureUnitBox_PreviewMouseDown"/>
+                    <TextBlock Text="Pressure:" Margin="40,5,0,0"></TextBlock>
+                    <TextBlock Name="PressureBox" Text="{Binding Main.Pressure}" Margin="5"></TextBlock>
+                    <TextBlock Text="hPa" Margin="75,5,0,0"></TextBlock>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Name="AdvancedWeatherGroupBox" Header="Advanced Weather"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="2">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Wind Speed:" Margin="5"/>
+                        <TextBlock Name="WindSpeedBox" Text="{Binding Wind.Speed}" Margin="5"/>
+                        <TextBlock Text="km/h" Margin="5"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="---"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
         </Grid>
 
         <!--
@@ -89,3 +117,4 @@
         </Grid> -->
     </Grid>
 </Window>
+
