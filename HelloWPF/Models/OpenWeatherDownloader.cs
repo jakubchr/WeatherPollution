@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 
-namespace HelloWPF.Models
+namespace WePo.Models
 {
     class OpenWeatherDownloader : IDataSource
     {

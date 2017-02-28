@@ -13,9 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using HelloWPF.Models;
+using WePo.Models;
 
-namespace HelloWPF
+namespace WePo
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -28,12 +28,13 @@ namespace HelloWPF
         private string _city;
         private IURLBuilder _urlBuilder;
         private IDataSource _weatherDownloader;
-        private IWeatherData _weatherObject;
+        private IWeatherData _weatherData;
         private IDataSourceConverter _weatherDataBinder;
 
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = _weatherData;
         }
 
         private void AddCityButton_Click(object sender, RoutedEventArgs e)
@@ -55,9 +56,9 @@ namespace HelloWPF
             }
 
             _weatherDownloader.DownloadDataByCity(_city);
-            _weatherObject = (RootWeatherobject) _weatherDataBinder.DeserializeJSON<RootWeatherobject>(_weatherDownloader.PushURL());
+            _weatherData = (RootWeatherobject) _weatherDataBinder.DeserializeJSON<RootWeatherobject>(_weatherDownloader.PushURL());
 
-            TemperatureBox.Text = _weatherObject.Main.Temp.ToString("0.0000");
+            //TemperatureBox.Text = _weatherData.Main.Temp.ToString("0.0000");
         }
 
         private bool AssignInitializeData()
@@ -67,7 +68,7 @@ namespace HelloWPF
                 _baseURL = @"http://api.openweathermap.org/data/2.5/weather";
                 _urlBuilder = new OpenWeatherAPIURLBuilder(_baseURL, _apiKey);
                 _weatherDownloader = new OpenWeatherDownloader(_urlBuilder);
-                _weatherObject = new RootWeatherobject();
+                _weatherData = new RootWeatherobject();
                 _weatherDataBinder = new OpenWeatherDataBinder();
             }
 

@@ -1,63 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="HelloWPF.Models.RootWeatherobject" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="WePo.Models.RootWeatherobject" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="2.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAgAAAAAABAABAAAQAAABBEAAAAAAQIAAAABgQ=</HashCode>
+      <HashCode>ACACAAAgAEAAAABAIBAAAQQQiBFEBAAQQAQEBAAARgQ=</HashCode>
       <FileName>Models\RootWeatherObject.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="HelloWPF.Models.Coord" Collapsed="true">
+  <Class Name="WePo.Models.Coord" Collapsed="true">
     <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAACAAAAAAAAAACAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\RootWeatherObject.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HelloWPF.Models.Main" Collapsed="true">
+  <Class Name="WePo.Models.Main" Collapsed="true">
     <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAIAAAAAIAgAEAAAAACCAAAACAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAIgAAADIAAAAQAAABCCAAAAigAAEAg=</HashCode>
       <FileName>Models\RootWeatherObject.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HelloWPF.Models.Wind" Collapsed="true">
+  <Class Name="WePo.Models.Wind" Collapsed="true">
     <Position X="2.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\RootWeatherObject.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HelloWPF.Models.Rain" Collapsed="true">
+  <Class Name="WePo.Models.Rain" Collapsed="true">
     <Position X="0.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\RootWeatherObject.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HelloWPF.Models.Clouds" Collapsed="true">
+  <Class Name="WePo.Models.Clouds" Collapsed="true">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
       <FileName>Models\RootWeatherObject.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HelloWPF.Models.Sys" Collapsed="true">
+  <Class Name="WePo.Models.Sys" Collapsed="true">
     <Position X="4" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQCAAAAAAAAAGA=</HashCode>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAEIAAAAAA=</HashCode>
       <FileName>Models\RootWeatherObject.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HelloWPF.Models.Weather" Collapsed="true">
+  <Class Name="WePo.Models.Weather" Collapsed="true">
     <Position X="0.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAQAAAAAAAgQ=</HashCode>
+      <HashCode>AAACAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAABAEAAAA=</HashCode>
       <FileName>Models\RootWeatherObject.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HelloWPF.Models.OpenWeatherAPIURLBuilder">
+  <Class Name="WePo.Models.OpenWeatherAPIURLBuilder">
     <Position X="0.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAgAAAACAAAAAAAAAAAAAAAIA=</HashCode>
@@ -65,45 +65,45 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="HelloWPF.Models.IWeatherLogger">
+  <Interface Name="WePo.Models.IWeatherLogger">
     <Position X="11" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Interfaces\IWeatherLogger.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="HelloWPF.Models.IWeatherData">
+  <Interface Name="WePo.Models.IWeatherData">
     <Position X="9.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAgAAAAAABAABAAAQAAABBEAAAAAAQIAAAABgQ=</HashCode>
+      <HashCode>ACACAAAAAEAAAAAAAAAAAAQQAAEABAAQQAAEBAAAQAA=</HashCode>
       <FileName>Models\Interfaces\IWeatherData.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="HelloWPF.Models.ISettingsReader">
+  <Interface Name="WePo.Models.ISettingsReader">
     <Position X="7.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
       <FileName>Models\Interfaces\ISettingsReader.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="HelloWPF.Models.ISettingsLogger">
+  <Interface Name="WePo.Models.ISettingsLogger">
     <Position X="5.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Interfaces\ISettingsLogger.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="HelloWPF.Models.IDataSourceConverter">
+  <Interface Name="WePo.Models.IDataSourceConverter">
     <Position X="9.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAACAAAA=</HashCode>
+      <HashCode>AAABAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Interfaces\IDataSourceConverter.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="HelloWPF.Models.IDataSource">
+  <Interface Name="WePo.Models.IDataSource">
     <Position X="7.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAgAAABAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>Models\Interfaces\IDataSource.cs</FileName>
     </TypeIdentifier>
   </Interface>
