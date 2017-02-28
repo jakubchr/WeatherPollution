@@ -13,9 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using HelloWPF.Models;
+using WePo.Models;
 
-namespace HelloWPF
+namespace WePo
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -28,12 +28,13 @@ namespace HelloWPF
         private string _city;
         private IURLBuilder _urlBuilder;
         private IDataSource _weatherDownloader;
-        private IWeatherData _weatherObject;
+        private IWeatherData _weatherData;
         private IDataSourceConverter _weatherDataBinder;
 
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = _weatherData;
         }
 
         private void AddCityButton_Click(object sender, RoutedEventArgs e)
@@ -49,25 +50,39 @@ namespace HelloWPF
 
         private void ShowWeatherButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!AssignInitializeData())
+            if (!AssignInitializeWeatherData())
             {
                 return;
             }
 
             _weatherDownloader.DownloadDataByCity(_city);
-            _weatherObject = (RootWeatherobject) _weatherDataBinder.DeserializeJSON<RootWeatherobject>(_weatherDownloader.PushURL());
+            _weatherData = (RootWeatherobject) _weatherDataBinder.DeserializeJSON<RootWeatherobject>(_weatherDownloader.PushURL());
 
-            TemperatureBox.Text = _weatherObject.Main.Temp.ToString("0.0000");
+            DetermineWeatherDataToShow();
         }
 
-        private bool AssignInitializeData()
+        public void DetermineWeatherDataToShow()
+        {
+            if (WeatherCheckBox.IsChecked == true)
+            {
+                TemperatureBox.Text = _weatherData.Main.Temp.ToString("0.0000");
+                PressureBox.Text = _weatherData.Main.Pressure.ToString("0.00");
+            }
+            if (AdvancedCheckBox.IsChecked == true)
+            {
+                WindSpeedBox.Text = _weatherData.Wind.Speed.ToString("0.000");
+            }
+        }
+
+
+        private bool AssignInitializeWeatherData()
         {
             if (OpenWeatherServiceRadio.IsChecked == true)
             {
                 _baseURL = @"http://api.openweathermap.org/data/2.5/weather";
                 _urlBuilder = new OpenWeatherAPIURLBuilder(_baseURL, _apiKey);
                 _weatherDownloader = new OpenWeatherDownloader(_urlBuilder);
-                _weatherObject = new RootWeatherobject();
+                _weatherData = new RootWeatherobject();
                 _weatherDataBinder = new OpenWeatherDataBinder();
             }
 
@@ -79,11 +94,19 @@ namespace HelloWPF
 
             try
             {
-                _city = ((ComboBoxItem) CitiesComboBox.SelectedItem).Content.ToString();
+                if (CitiesComboBox.SelectedItem.GetType().Equals((new ComboBoxItem()).GetType()))
+                {
+                    _city = ((ComboBoxItem)CitiesComboBox.SelectedItem).Content.ToString();
+                }
+                else
+                {
+                    _city = CitiesComboBox.SelectedItem.ToString();
+                }
+                
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Message returned by application: {ex.Message} \n Probably city name is invalid.");
+                MessageBox.Show($"Message returned by application: {ex.Message} \n Probably city name is invalid. \n Selected item is {CitiesComboBox.SelectedItem.GetType()}");
                 return false;
             }
             return true;
@@ -127,6 +150,26 @@ namespace HelloWPF
         private void TemperatureUnitBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             TemperatureBox_PreviewMouseDown(sender, e);
+        }
+
+        private void WeatherCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            BasicWeatherGroupBox.Visibility = Visibility.Visible;
+        }
+
+        private void WeatherCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            BasicWeatherGroupBox.Visibility = Visibility.Hidden;
+        }
+
+        private void AdvancedCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            AdvancedWeatherGroupBox.Visibility = Visibility.Visible;
+        }
+
+        private void AdvancedCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            AdvancedWeatherGroupBox.Visibility = Visibility.Hidden;
         }
 
         /*TEST

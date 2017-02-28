@@ -6,18 +6,20 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents.DocumentStructures;
-using HelloWPF.Annotations;
 using Newtonsoft.Json;
+using WePo.Annotations;
 
-namespace HelloWPF.Models
+namespace WePo.Models
 {
     public class RootWeatherobject : IWeatherData, INotifyPropertyChanged
     {
         public RootWeatherobject() { }
         [JsonConstructor]
-        public RootWeatherobject(Coord coord, Weather[] weather, string baseBase, Main main, Wind wind, Rain rain, Clouds clouds, int dt, Sys sys,
+        public RootWeatherobject(Coord coord, Weather[] weather, string baseBase, Main main, Wind wind, Rain rain,
+            Clouds clouds, int dt, Sys sys,
             int id, string name, int cod)
         {
+            Coord = new Coord();
             Coord = coord;
             Weather = weather;
             Base = baseBase;
@@ -31,41 +33,190 @@ namespace HelloWPF.Models
             Name = name;
             Cod = cod;
         }
-        public Coord Coord { get; private set; }
-        public Weather[] Weather { get; private set; }
-        public string Base { get; private set; }
-        public Main Main { get; private set; }
-        public Wind Wind { get; private set; }
-        public Rain Rain { get; private set; }
-        public Clouds Clouds { get; private set; }
-        public int Dt { get; private set; }
-        public Sys Sys { get; private set; }
-        public int Id { get; private set; }
-        public string Name { get; private set; }
-        public int Cod { get; private set; }
+
+        private Coord coord;
+
+        public Coord Coord
+        {
+            get { return coord; }
+            set
+            {
+                coord = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Weather[] weather;
+
+        public Weather[] Weather
+        {
+            get
+            {
+                return weather;
+            }
+            set
+            {
+                weather = value; OnPropertyChanged();
+
+            }
+        }
+        private string baseString;
+
+        public string Base
+        {
+            get
+            {
+                return baseString;
+            }
+            set
+            {
+                baseString = value; OnPropertyChanged();
+
+            }
+        }
+
+        private Main main;
+
+        public Main Main
+        {
+            get { return main; }
+            set
+            {
+                main = value; OnPropertyChanged();
+
+            }
+        }
+
+        private Wind wind;
+
+        public Wind Wind
+        {
+            get { return wind; }
+            set
+            {
+                wind = value; OnPropertyChanged();
+
+            }
+        }
+
+        private Rain rain;
+
+        public Rain Rain
+        {
+            get { return rain; }
+            set
+            {
+                rain = value; OnPropertyChanged();
+
+            }
+        }
+
+        private Clouds clouds;
+
+        public Clouds Clouds
+        {
+            get { return clouds; }
+            set
+            {
+                clouds = value; OnPropertyChanged();
+
+            }
+        }
+
+        private int dt;
+
+        public int Dt
+        {
+            get { return dt; }
+            set
+            {
+                dt = value; OnPropertyChanged();
+
+            }
+        }
+
+        private Sys sys;
+
+        public Sys Sys
+        {
+            get { return sys; }
+            set { sys = value; OnPropertyChanged();
+            }
+        }
+
+        private int id;
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set { id = value; OnPropertyChanged();
+            }
+        }
+
+        private string name;
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set { name = value; OnPropertyChanged();}
+        }
+
+        private int cod;
+
+        public int Cod
+        {
+            get { return cod; }
+            set
+            {
+                cod = value; OnPropertyChanged();
+
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
-    public class Coord
+    public class Coord : INotifyPropertyChanged
     {
+        public Coord() { }
         [JsonConstructor]
         public Coord(float lon, float lat)
         {
             Lon = lon;
             Lat = lat;
         }
-        public float Lon { get; private set; }
-        public float Lat { get; private set; }
+
+        private float lon;
+        public float Lon { get {return lon;} set { lon = value; OnPropertyChanged();
+            }
+        }
+        private float lat;
+        public float Lat { get { return lat; } set { lat = value; OnPropertyChanged();   }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class Main
+    public class Main : INotifyPropertyChanged
     {
+        public Main() { }
         [JsonConstructor]
         public Main(float temp, float pressure, int humidity, float temp_min, float temp_max, float sea_level,
             float grnd_level)
@@ -78,49 +229,190 @@ namespace HelloWPF.Models
             Sea_level = sea_level;
             Grnd_level = grnd_level;
         }
-        public float Temp { get; private set; }
-        public float Pressure { get; private set; }
-        public int Humidity { get; private set; }
-        public float TempMin { get; private set; }
-        public float Temp_max { get; private set; }
-        public float Sea_level { get; private set; }
-        public float Grnd_level { get; private set; }
+
+        private float temp;
+        public float Temp
+        {
+            get { return temp; }
+            set { temp = value; OnPropertyChanged();
+            }
+        }
+
+        private float pressure;
+        public float Pressure {
+            get { return pressure; }
+            set
+            {
+                pressure = value; OnPropertyChanged();
+
+            }
+        }
+
+        private int humidity;
+
+        public int Humidity
+        {
+            get
+            {
+                return humidity;
+            }
+            set
+            {
+                humidity = value; OnPropertyChanged();
+
+            }
+        }
+
+        private float tempMin;
+
+        public float TempMin
+        {
+            get
+            {
+                return tempMin;
+            }
+            set
+            {
+                tempMin = value; OnPropertyChanged();
+
+            }
+        }
+
+        private float temp_max;
+
+        public float Temp_max
+        {
+            get
+            {
+                return temp_max;
+            }
+            set
+            {
+                temp_max = value; OnPropertyChanged();
+
+            }
+        }
+
+        private float sea_Level;
+
+        public float Sea_level
+        {
+            get { return sea_Level; }
+            set
+            {
+                sea_Level = value; OnPropertyChanged();
+
+            }
+        }
+
+        private float grnd_Level;
+
+        public float Grnd_level
+        {
+            get
+            {
+                return grnd_Level;
+            }
+            set { grnd_Level = value; OnPropertyChanged();
+
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class Wind
+    public class Wind : INotifyPropertyChanged
     {
+        public Wind() { }
         [JsonConstructor]
         public Wind(float speed, float deg)
         {
             Speed = speed;
             Deg = deg;
         }
-        public float Speed { get; private set; }
-        public float Deg { get; private set; }
+
+        private float speed;
+
+        public float Speed
+        {
+            get
+            {
+                return speed;
+            }
+            set { speed = value; OnPropertyChanged();
+            }
+        }
+
+        private float deg;
+
+        public float Deg
+        {
+            get
+            {
+                return deg;
+            }
+            set
+            {
+                deg = value;
+                OnPropertyChanged();
+
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class Rain
+    public class Rain : INotifyPropertyChanged
     {
+        public Rain() { }
         [JsonConstructor]
         public Rain(float _3h)
         {
             this._3h = _3h;
         }
         public float _3h { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class Clouds
+    public class Clouds : INotifyPropertyChanged
     {
+        public Clouds() { }
         [JsonConstructor]
         public Clouds(int all)
         {
             All = all;
         }
         public int All { get; private set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class Sys
+    public class Sys : INotifyPropertyChanged
     {
+        public Sys() { }
         [JsonConstructor]
         public Sys(float message, string country, int sunrise, int sunset)
         {
@@ -133,10 +425,18 @@ namespace HelloWPF.Models
         public string Country { get; private set; }
         public int Sunrise { get; private set; }
         public int Sunset { get; private set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
-    public class Weather
+    public class Weather : INotifyPropertyChanged
     {
+        public Weather() { }
         [JsonConstructor]
         public Weather(int id, string main, string description, string icon)
         {
@@ -149,6 +449,13 @@ namespace HelloWPF.Models
         public string Main { get; private set; }
         public string Description { get; private set; }
         public string Icon { get; private set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [HelloWPF.Annotations.NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
 }

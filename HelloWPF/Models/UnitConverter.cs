@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HelloWPF.Models
+namespace WePo.Models
 {
     public static class UnitConverter
     {
