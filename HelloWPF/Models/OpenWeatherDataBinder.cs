@@ -7,20 +7,22 @@ using Newtonsoft.Json;
 
 namespace WePo.Models
 {
-    class OpenWeatherDataBinder : IDataSourceConverter
+    class OpenWeatherDataBinder<T> : IDataSourceConverter<T> where T : IWeatherData
     {
-        public IWeatherData WeatherData { get; private set; }
-        public IWeatherData DeserializeJSON<T>(string json_data) where T : IWeatherData
+        public T Data { get; private set; }
+
+        public T DeserializeJSON(string json_data)
         {
             if (json_data.Length != 0)
             {
-                WeatherData = JsonConvert.DeserializeObject<T>(json_data);
+                Data = JsonConvert.DeserializeObject<T>(json_data);
             }
             else
             {
                 throw new ApplicationException("json data is empty");
             }
-            return WeatherData;
+            return Data;
         }
+
     }
 }

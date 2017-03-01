@@ -29,7 +29,7 @@ namespace WePo
         private IURLBuilder _urlBuilder;
         private IDataSource _weatherDownloader;
         private IWeatherData _weatherData;
-        private IDataSourceConverter _weatherDataBinder;
+        private IDataSourceConverter<IWeatherData> _DataBinder;
 
         public MainWindow()
         {
@@ -55,8 +55,7 @@ namespace WePo
                 return;
             }
 
-            _weatherDownloader.DownloadDataByCity(_city);
-            _weatherData = (OpenWeatherObject) _weatherDataBinder.DeserializeJSON<OpenWeatherObject>(_weatherDownloader.PushURL());
+            _weatherData = _DataBinder.DeserializeJSON(_weatherDownloader.PushURL());
 
             DetermineWeatherDataToShow();
         }
@@ -77,21 +76,6 @@ namespace WePo
 
         private bool AssignInitializeWeatherData()
         {
-            if (OpenWeatherServiceRadio.IsChecked == true)
-            {
-                _baseURL = @"http://api.openweathermap.org/data/2.5/weather";
-                _urlBuilder = new OpenWeatherAPIURLBuilder(_baseURL, _apiKey);
-                _weatherDownloader = new OpenWeatherDownloader(_urlBuilder);
-                _weatherData = new OpenWeatherObject();
-                _weatherDataBinder = new OpenWeatherDataBinder();
-            }
-
-            if (CitiesComboBox.SelectedItem == null || CitiesComboBox.SelectedItem.ToString().Length == 0)
-            {
-                MessageBox.Show("You have not selected city!");
-                return false;
-            }
-
             try
             {
                 if (CitiesComboBox.SelectedItem.GetType().Equals((new ComboBoxItem()).GetType()))
@@ -102,13 +86,30 @@ namespace WePo
                 {
                     _city = CitiesComboBox.SelectedItem.ToString();
                 }
-                
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Message returned by application: {ex.Message} \n Probably city name is invalid. \n Selected item is {CitiesComboBox.SelectedItem.GetType()}");
                 return false;
             }
+
+            if (OpenWeatherServiceRadio.IsChecked == true)
+            {
+                _baseURL = @"http://api.openweathermap.org/data/2.5/weather";
+                _urlBuilder = new OpenWeatherAPIURLBuilder(_baseURL, _apiKey);
+                _weatherDownloader = new OpenWeatherDownloader(_urlBuilder);
+                _weatherData = new OpenWeatherObject();
+                _DataBinder = new OpenWeatherDataBinder<OpenWeatherObject>();
+                _weatherDownloader.DownloadDataByCity(_city);
+            }
+
+            if (CitiesComboBox.SelectedItem == null || CitiesComboBox.SelectedItem.ToString().Length == 0)
+            {
+                MessageBox.Show("You have not selected city!");
+                return false;
+            }
+            
             return true;
         }
 
