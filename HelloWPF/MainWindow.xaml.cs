@@ -29,7 +29,7 @@ namespace WePo
         private IURLBuilder _urlBuilder;
         private IDataSource _weatherDownloader;
         private IWeatherData _weatherData;
-        private IDataSourceConverter _weatherDataBinder;
+        private IDataSourceConverter<IWeatherData> _DataBinder;
 
         public MainWindow()
         {
@@ -55,8 +55,7 @@ namespace WePo
                 return;
             }
 
-            _weatherDownloader.DownloadDataByCity(_city);
-            _weatherData = (RootWeatherobject) _weatherDataBinder.DeserializeJSON<RootWeatherobject>(_weatherDownloader.PushURL());
+            _weatherData = _DataBinder.DeserializeJSON(_weatherDownloader.PushURL());
 
             DetermineWeatherDataToShow();
         }
@@ -77,21 +76,6 @@ namespace WePo
 
         private bool AssignInitializeWeatherData()
         {
-            if (OpenWeatherServiceRadio.IsChecked == true)
-            {
-                _baseURL = @"http://api.openweathermap.org/data/2.5/weather";
-                _urlBuilder = new OpenWeatherAPIURLBuilder(_baseURL, _apiKey);
-                _weatherDownloader = new OpenWeatherDownloader(_urlBuilder);
-                _weatherData = new RootWeatherobject();
-                _weatherDataBinder = new OpenWeatherDataBinder();
-            }
-
-            if (CitiesComboBox.SelectedItem == null || CitiesComboBox.SelectedItem.ToString().Length == 0)
-            {
-                MessageBox.Show("You have not selected city!");
-                return false;
-            }
-
             try
             {
                 if (CitiesComboBox.SelectedItem.GetType().Equals((new ComboBoxItem()).GetType()))
@@ -102,13 +86,30 @@ namespace WePo
                 {
                     _city = CitiesComboBox.SelectedItem.ToString();
                 }
-                
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Message returned by application: {ex.Message} \n Probably city name is invalid. \n Selected item is {CitiesComboBox.SelectedItem.GetType()}");
                 return false;
             }
+
+            if (OpenWeatherServiceRadio.IsChecked == true)
+            {
+                _baseURL = @"http://api.openweathermap.org/data/2.5/weather";
+                _urlBuilder = new OpenWeatherAPIURLBuilder(_baseURL, _apiKey);
+                _weatherDownloader = new OpenWeatherDownloader(_urlBuilder);
+                _weatherData = new OpenWeatherObject();
+                _DataBinder = new OpenWeatherDataBinder<OpenWeatherObject>();
+                _weatherDownloader.DownloadDataByCity(_city);
+            }
+
+            if (CitiesComboBox.SelectedItem == null || CitiesComboBox.SelectedItem.ToString().Length == 0)
+            {
+                MessageBox.Show("You have not selected city!");
+                return false;
+            }
+            
             return true;
         }
 
@@ -178,9 +179,9 @@ namespace WePo
             OpenWeatherAPIURLBuilder urlBuilder = new OpenWeatherAPIURLBuilder("http://api.openweathermap.org/data/2.5/weather", "f7e2509b51e34ef70bc66b0a816fbb11");
             OpenWeatherDownloader openWeatherDownloader = new OpenWeatherDownloader(urlBuilder);
             openWeatherDownloader.DownloadDataByCity("Siemiatycze");
-            RootWeatherobject rootWeatherobject = new RootWeatherobject();
+            OpenWeatherObject rootWeatherobject = new OpenWeatherObject();
             OpenWeatherDataBinder openWeatherDataBinder = new OpenWeatherDataBinder();
-            rootWeatherobject = (RootWeatherobject) openWeatherDataBinder.DeserializeJSON<RootWeatherobject>(openWeatherDownloader.PushURL());
+            rootWeatherobject = (OpenWeatherObject) openWeatherDataBinder.DeserializeJSON<OpenWeatherObject>(openWeatherDownloader.PushURL());
 
 
             TemperatureBox.Text = rootWeatherobject.Main.Temp.ToString("0.0000");
