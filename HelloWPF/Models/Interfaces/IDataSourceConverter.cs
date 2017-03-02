@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WePo.Models
 {
-    interface IDataSourceConverter<out T> where T : IWeatherData
+    interface IDataSourceConverter<out T>
     {
         T Data { get; }
         T DeserializeJSON(string json_data);
