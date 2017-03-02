@@ -13,14 +13,16 @@ namespace WePo.Models
         {
             URLBuilder = urlBuilder;
         }
+
         public IURLBuilder URLBuilder { get; set; }
         public string URL { get; private set; }
         private Dictionary<string, string> parametersDictionary = new Dictionary<string, string>();
 
         public void DownloadDataByCity(string cityName)
         {
-            parametersDictionary.Add("q",cityName);
+            parametersDictionary.Add("q", cityName);
         }
+
         public void DownloadDataByLatitudeLongitude(double latitude, double longitude)
         {
             throw new NotImplementedException();

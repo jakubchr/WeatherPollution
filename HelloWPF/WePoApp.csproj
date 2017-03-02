@@ -73,8 +73,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CompositionObjects\City.cs" />
     <Compile Include="Models\CompositionObjects\Clouds.cs" />
     <Compile Include="Models\CompositionObjects\Coord.cs" />
+    <Compile Include="Models\CompositionObjects\Temp.cs" />
+    <Compile Include="Models\OpenWeatherForecastWeatherObject.cs" />
     <Compile Include="Models\Interfaces\IURLBuilder.cs" />
     <Compile Include="Models\CompositionObjects\Main.cs" />
     <Compile Include="Models\OpenWeatherAPIURLBuilder.cs" />
