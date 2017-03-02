@@ -29,7 +29,7 @@ namespace WePo
         private IURLBuilder _urlBuilder;
         private IDataSource _weatherDownloader;
         private IWeatherData _weatherData;
-        private IDataSourceConverter<IWeatherData> _DataBinder;
+        private IDataSourceConverter<IWeatherData> _dataBinder;
 
         public MainWindow()
         {
@@ -54,8 +54,6 @@ namespace WePo
             {
                 return;
             }
-
-            _weatherData = _DataBinder.DeserializeJSON(_weatherDownloader.PushURL());
 
             DetermineWeatherDataToShow();
         }
@@ -96,12 +94,22 @@ namespace WePo
 
             if (OpenWeatherServiceRadio.IsChecked == true)
             {
-                _baseURL = @"http://api.openweathermap.org/data/2.5/weather";
-                _urlBuilder = new OpenWeatherAPIURLBuilder(_baseURL, _apiKey);
-                _weatherDownloader = new OpenWeatherDownloader(_urlBuilder);
-                _weatherData = new OpenWeatherObject();
-                _DataBinder = new OpenWeatherDataBinder<OpenWeatherObject>();
-                _weatherDownloader.DownloadDataByCity(_city);
+                try
+                {
+                    _baseURL = @"http://api.openweathermap.org/data/2.5/weather";
+                    _urlBuilder = new OpenWeatherAPIURLBuilder(_baseURL, _apiKey);
+                    _weatherDownloader = new OpenWeatherDownloader(_urlBuilder);
+                    _weatherData = new OpenWeatherObject();
+                    _dataBinder = new OpenWeatherDataBinder<OpenWeatherObject>();
+                    _weatherDownloader.DownloadDataByCity(_city);
+                    _weatherData = _dataBinder.DeserializeJSON(_weatherDownloader.PushURL());
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
+                    return false;
+                }
             }
 
             if (CitiesComboBox.SelectedItem == null || CitiesComboBox.SelectedItem.ToString().Length == 0)
@@ -143,49 +151,19 @@ namespace WePo
             }
         }
 
-        private void TextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            TemperatureBox_PreviewMouseDown(sender, e);
-        }
+        private void TextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e) => TemperatureBox_PreviewMouseDown(sender, e);
 
-        private void TemperatureUnitBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            TemperatureBox_PreviewMouseDown(sender, e);
-        }
+        private void TemperatureUnitBox_PreviewMouseDown(object sender, MouseButtonEventArgs e) => TemperatureBox_PreviewMouseDown(sender, e);
 
-        private void WeatherCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            BasicWeatherGroupBox.Visibility = Visibility.Visible;
-        }
-
-        private void WeatherCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            BasicWeatherGroupBox.Visibility = Visibility.Hidden;
-        }
-
-        private void AdvancedCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            AdvancedWeatherGroupBox.Visibility = Visibility.Visible;
-        }
-
-        private void AdvancedCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            AdvancedWeatherGroupBox.Visibility = Visibility.Hidden;
-        }
-
-        /*TEST
-        private void ShowWeatherButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenWeatherAPIURLBuilder urlBuilder = new OpenWeatherAPIURLBuilder("http://api.openweathermap.org/data/2.5/weather", "f7e2509b51e34ef70bc66b0a816fbb11");
-            OpenWeatherDownloader openWeatherDownloader = new OpenWeatherDownloader(urlBuilder);
-            openWeatherDownloader.DownloadDataByCity("Siemiatycze");
-            OpenWeatherObject rootWeatherobject = new OpenWeatherObject();
-            OpenWeatherDataBinder openWeatherDataBinder = new OpenWeatherDataBinder();
-            rootWeatherobject = (OpenWeatherObject) openWeatherDataBinder.DeserializeJSON<OpenWeatherObject>(openWeatherDownloader.PushURL());
+        private void WeatherCheckBox_Checked(object sender, RoutedEventArgs e) => BasicWeatherGroupBox.Visibility = Visibility.Visible;
 
 
-            TemperatureBox.Text = rootWeatherobject.Main.Temp.ToString("0.0000");
-        }
-        */
+        private void WeatherCheckBox_Unchecked(object sender, RoutedEventArgs e) => BasicWeatherGroupBox.Visibility = Visibility.Hidden;
+
+        private void AdvancedCheckBox_Checked(object sender, RoutedEventArgs e) => AdvancedWeatherGroupBox.Visibility = Visibility.Visible;
+
+
+        private void AdvancedCheckBox_Unchecked(object sender, RoutedEventArgs e) => AdvancedWeatherGroupBox.Visibility = Visibility.Hidden;
+
     }
 }

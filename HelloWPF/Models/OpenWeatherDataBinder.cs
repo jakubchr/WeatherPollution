@@ -9,7 +9,7 @@ namespace WePo.Models
 {
     class OpenWeatherDataBinder<T> : IDataSourceConverter<T> where T : IWeatherData
     {
-        public T Data { get; private set; }
+    public T Data { get; private set; }
 
         public T DeserializeJSON(string json_data)
         {

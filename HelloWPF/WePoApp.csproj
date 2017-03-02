@@ -80,7 +80,7 @@
     <Compile Include="Models\OpenWeatherAPIURLBuilder.cs" />
     <Compile Include="Models\OpenWeatherDataBinder.cs" />
     <Compile Include="Models\OpenWeatherDownloader.cs" />
-    <Compile Include="Models\OpenWeatherObject.cs" />
+    <Compile Include="Models\OpenWeatherCurrentWeatherObject.cs" />
     <Compile Include="Models\Interfaces\ISettingsLogger.cs" />
     <Compile Include="Models\Interfaces\IWeatherLogger.cs" />
     <Compile Include="Models\Interfaces\IDataSource.cs" />
