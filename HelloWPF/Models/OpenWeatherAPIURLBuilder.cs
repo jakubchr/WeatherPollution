@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HelloWPF.Models;
 
 namespace WePo.Models
 {
-    class OpenWeatherAPIURLBuilder : IURLBuilder
+    class OpenWeatherAPIURLBuilder : OpenWeather, IURLBuilder
     {
-        public OpenWeatherAPIURLBuilder(string baseURL, string apiKey)
+        public OpenWeatherAPIURLBuilder(string baseURL)
         {
             BaseURL = baseURL;
-            ApiKey = apiKey.Trim();
         }
 
         private string _baseURL;
@@ -35,7 +35,6 @@ namespace WePo.Models
             }
         }
 
-        private string ApiKey { get; }
         public string BuildURL(Dictionary<string, string> parametersDictionary)
         {
             if (parametersDictionary == null || parametersDictionary.Count == 0)

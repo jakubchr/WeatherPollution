@@ -23,7 +23,6 @@ namespace WePo
     public partial class MainWindow : Window
     {
         private string _baseURL;
-        private string _apiKey = @"f7e2509b51e34ef70bc66b0a816fbb11";
         private string _aqicnToken = @"a4be2dbca8a043b96f8e7bf89a078a2a34e36420";
         private string _city;
         private IURLBuilder _urlBuilder;
@@ -88,7 +87,14 @@ namespace WePo
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Message returned by application: {ex.Message} \n Probably city name is invalid. \n Selected item is {CitiesComboBox.SelectedItem.GetType()}");
+                if (CitiesComboBox.SelectedItem != null)
+                {
+                    MessageBox.Show($"Message returned by application: {ex.Message} \n Probably city name is invalid. \n Selected item is {CitiesComboBox.SelectedItem.GetType()}");
+                }
+                else
+                {
+                    MessageBox.Show($"Message returned by application: {ex.Message} \n You haven't entered the city name.");
+                }
                 return false;
             }
 
@@ -97,7 +103,7 @@ namespace WePo
                 try
                 {
                     _baseURL = @"http://api.openweathermap.org/data/2.5/weather";
-                    _urlBuilder = new OpenWeatherAPIURLBuilder(_baseURL, _apiKey);
+                    _urlBuilder = new OpenWeatherAPIURLBuilder(_baseURL);
                     _weatherDownloader = new OpenWeatherDownloader(_urlBuilder);
                     _weatherData = new OpenWeatherObject();
                     _dataBinder = new OpenWeatherDataBinder<OpenWeatherObject>();
